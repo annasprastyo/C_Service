@@ -4,16 +4,17 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:gravity="center"
-              android:oriental="vertical"
               android:background="#95F2AD"
 >
 
     <ImageView
+            android:id="@+id/logosplash"
             android:layout_width="259dp"
             android:layout_height="174dp"
-            android:src="@drawable/C_Service_2"
+            android:src="@drawable/logo"
     />
     <TextView
+            android:id="@+id/tv_splash"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="C-Service"
