@@ -7,7 +7,6 @@
               android:layout_height="match_parent">
 
     <LinearLayout
-            android:id="@+id/ll_CreateJob"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="#A9B7C8"
@@ -25,17 +24,15 @@
                 android:paddingBottom="10dp"
         />
         <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Create Job"
-                android:textSize="30sp"
-                android:textStyle="bold"
+                android:textSize="35sp"
                 android:textColor="#ffff"
                 android:layout_gravity="center"
         />
     </LinearLayout>
     <LinearLayout
-            android:id="@+id/ll_ReceiveJob"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="#A9B7C8"
@@ -55,17 +52,15 @@
                 android:paddingBottom="10dp"
         />
         <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Receive Job"
-                android:textSize="30sp"
-                android:textStyle="bold"
+                android:textSize="35sp"
                 android:textColor="#ffff"
                 android:layout_gravity="center"
         />
     </LinearLayout>
     <LinearLayout
-            android:id="@+id/ll_Profile"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="#A9B7C8"
@@ -85,11 +80,10 @@
                 android:paddingBottom="10dp"
         />
         <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Profile"
-                android:textSize="30sp"
-                android:textStyle="bold"
+                android:textSize="35sp"
                 android:textColor="#ffff"
                 android:layout_gravity="center"
         />
@@ -104,16 +98,16 @@
                 android:layout_height="70dp"
                 android:layout_gravity="bottom"
                 android:background="#5EDCA6">
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Selamat Datang di C-Service"
-                    android:textSize="25sp"
-                    android:textAlignment="center"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:textColor="#ffff"
-            />
-        </LinearLayout>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Selamat Datang di C-Service"
+                android:textSize="25sp"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="#ffff"
+        />
+    </LinearLayout>
     </LinearLayout>
 </LinearLayout>

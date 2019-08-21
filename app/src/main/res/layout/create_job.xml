@@ -15,45 +15,41 @@
         <ImageView
                 android:layout_width="108dp"
                 android:layout_height="150dp"
-                android:src="@drawable/receivejob"
-                android:layout_marginStart="10dp"
+                android:src="@drawable/createjob"
+                android:layout_marginStart="20dp"
                 android:paddingTop="35dp"
                 android:paddingBottom="35dp"
                 android:layout_gravity="center"
         />
         <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="189dp"
                 android:layout_height="wrap_content"
-                android:text="Receive Job"
+                android:text="Create Job"
                 android:textStyle="bold"
-                android:textSize="33sp"
+                android:textSize="35sp"
                 android:textColor="#ffff"
                 android:gravity="center"
                 android:layout_gravity="center"
         />
     </LinearLayout>
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_width="365dp"
+            android:layout_height="50dp"
             android:layout_marginTop="-25dp"
             android:background="#676767"
-            android:layout_marginStart="23dp"
-            android:layout_marginEnd="23dp"
             android:orientation="horizontal"
             android:layout_gravity="center">
     </LinearLayout>
     <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="365dp"
             android:layout_height="80dp"
             android:background="#E2E0E0"
-            android:layout_marginStart="23dp"
-            android:layout_marginEnd="23dp"
             android:orientation="horizontal"
             android:layout_gravity="center">
         <ImageView
                 android:layout_width="81dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/receivejob"
+                android:src="@drawable/createjob"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:layout_marginStart="10dp"
@@ -61,17 +57,15 @@
         <TextView
                 android:layout_width="142dp"
                 android:layout_height="wrap_content"
-                android:text="Receive Job"
+                android:text="Create Job"
                 android:textSize="25sp"
                 android:layout_gravity="center"
         />
     </LinearLayout>
     <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="365dp"
             android:layout_height="80dp"
             android:background="#E2E0E0"
-            android:layout_marginStart="23dp"
-            android:layout_marginEnd="23dp"
             android:orientation="horizontal"
             android:layout_gravity="center">
         <ImageView
@@ -91,17 +85,15 @@
         />
     </LinearLayout>
     <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="365dp"
             android:layout_height="80dp"
             android:background="#E2E0E0"
             android:orientation="horizontal"
-            android:layout_marginStart="23dp"
-            android:layout_marginEnd="23dp"
             android:layout_gravity="center">
         <ImageView
                 android:layout_width="81dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/bookmark2"
+                android:src="@drawable/bookmark1"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:layout_marginStart="10dp"
