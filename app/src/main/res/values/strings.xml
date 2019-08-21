@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">C_Service</string>
+    <string-array name="list_Department">
+        <item>IT</item>
+        <item>Electro</item>
+        <item>Networking</item>
+        <item>Cleaning Service</item>
+    </string-array>
 </resources>
