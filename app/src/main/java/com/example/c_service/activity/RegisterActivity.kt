@@ -1,16 +1,15 @@
-package com.example.c_service
+package com.example.c_service.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.*
+import com.example.c_service.R
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.register_activity.*
-import kotlinx.android.synthetic.main.register_activity.view.*
 
 class RegisterActivity: AppCompatActivity() {
 

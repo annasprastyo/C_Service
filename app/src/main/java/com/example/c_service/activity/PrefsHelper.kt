@@ -1,4 +1,4 @@
-package com.example.c_service
+package com.example.c_service.activity
 
 import android.content.Context
 import android.content.SharedPreferences
