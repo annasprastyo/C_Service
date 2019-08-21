@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:oriental="vertical"
+              android:background="#95F2AD"
+>
+
+    <ImageView
+            android:layout_width="259dp"
+            android:layout_height="174dp"
+            android:src="@drawable/C_Service_2"
+    />
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="C-Service"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+    />
+</LinearLayout>
