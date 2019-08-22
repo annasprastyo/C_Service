@@ -1,5 +1,6 @@
 package com.example.c_service.activity
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
@@ -89,7 +90,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_chat -> {
-//            startActivity(Intent(this, ChatActivity::class.java))
+            startActivity(Intent(this, ChatActivity::class.java))
             true
         }
 

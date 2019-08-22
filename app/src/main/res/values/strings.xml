@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">C_Service</string>
+    <string name="settings_file_name">C-Service</string>
+    <string name="error_could_not_connect">Could not connect</string>
     <string-array name="list_Department">
         <item>IT</item>
         <item>Electro</item>

@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.c_service.R
 import com.example.c_service.activity.LoginActivity
 import com.example.c_service.activity.PrefsHelper
+import com.example.c_service.activity.SettingActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -50,7 +51,7 @@ class FrProfile: Fragment() {
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-                Log.e("uid", helperPrefs.getUID())
+//                Log.e("uid", helperPrefs.getUID())
                 if (p0.child("/Foto").value.toString() != "null") {
                     Glide.with(view.context)
                         .load(p0.child("/Foto").value.toString())
@@ -69,6 +70,9 @@ class FrProfile: Fragment() {
             signOut()
             startActivity(Intent(activity!!, LoginActivity::class.java))
             activity!!.finish()
+        }
+        ubah.setOnClickListener {
+            startActivity(Intent(activity!!, SettingActivity::class.java))
         }
     }
     fun signOut() {

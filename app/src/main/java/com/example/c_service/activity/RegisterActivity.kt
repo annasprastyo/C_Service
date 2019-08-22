@@ -55,7 +55,7 @@ class RegisterActivity: AppCompatActivity() {
                         mDatabase.child(uid).child("Kontak").setValue(nomor)
                         mDatabase.child(uid).child("Password").setValue(password)
                         mDatabase.child(uid).child("Foto").setValue("null")
-                        startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
+                        startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
 
                         Toast.makeText(this, "Berhasil Daftar", Toast.LENGTH_SHORT).show()
                         finish()

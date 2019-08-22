@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+            android:id="@+id/pro"
+            android:background="@drawable/corner"
+            android:layout_marginTop="60dp"
+            android:layout_width="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:padding="20dp"
+            android:layout_height="410dp"
+            android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_gravity="center"
+                android:src="@drawable/avatar"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
+                android:id="@+id/img_upload"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:id="@+id/judulnama"
+                    android:layout_below="@+id/avatar"
+                    android:textSize="15dp"
+                    android:textColor="#414040"
+                    android:text="Nama"
+                    android:layout_weight="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            <EditText
+                    android:id="@+id/nama_update"
+                    android:textColor="#414040"
+                    android:textSize="15dp"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/judulalamat"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:id="@+id/judulalamat"
+                    android:layout_below="@+id/avatar"
+                    android:textSize="15dp"
+                    android:textColor="#414040"
+                    android:text="Department    "
+                    android:layout_weight="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            <Spinner
+                    android:entries="@array/list_Department"
+                    android:layout_below="@+id/password"
+                    android:id="@+id/department"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+            >
+            </Spinner>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:id="@+id/judulkontak"
+                    android:layout_below="@+id/avatar"
+                    android:textSize="15dp"
+                    android:textColor="#414040"
+                    android:text="Kontak"
+                    android:layout_weight="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            <EditText
+                    android:id="@+id/kontak_update"
+                    android:textColor="#414040"
+                    android:textSize="15dp"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/judulalamat"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:id="@+id/judulemail"
+                    android:layout_below="@+id/avatar"
+                    android:textSize="15dp"
+                    android:textColor="#414040"
+                    android:text="Email"
+                    android:layout_weight="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            <EditText
+                    android:id="@+id/email_update"
+                    android:textColor="#414040"
+                    android:textSize="15dp"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/judulalamat"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+            android:layout_below="@+id/pro"
+            android:id="@+id/btn_update"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="S A v e"
+            android:textSize="18dp"
+            android:textColor="#fff"
+            android:background="@drawable/corner2"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    <include
+            android:id="@+id/llProgressBar"
+            android:visibility="gone"
+            layout="@layout/activity_loading"/>
+
+</RelativeLayout>
