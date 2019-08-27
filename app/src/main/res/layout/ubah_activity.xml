@@ -141,7 +141,7 @@
             android:layout_height="wrap_content"/>
     <include
             android:id="@+id/llProgressBar"
-            android:visibility="gone"
+            android:visibility="visible"
             layout="@layout/activity_loading"/>
 
 </RelativeLayout>
