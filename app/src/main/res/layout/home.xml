@@ -7,17 +7,17 @@
               android:layout_height="match_parent">
 
     <LinearLayout
-            android:layout_width="330dp"
-            android:layout_height="96dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
             android:background="#A9B7C8"
             android:layout_gravity="center"
             android:orientation="horizontal"
-            android:layout_marginTop="100dp"
+            android:layout_margin="30dp"
     >
         <ImageView
                 android:layout_width="115dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/create"
+                android:src="@drawable/createjob"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:paddingTop="10dp"
@@ -33,17 +33,19 @@
         />
     </LinearLayout>
     <LinearLayout
-            android:layout_width="330dp"
-            android:layout_height="96dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
             android:background="#A9B7C8"
             android:layout_gravity="center"
             android:orientation="horizontal"
-            android:layout_marginTop="15dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
     >
         <ImageView
                 android:layout_width="115dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/check_mark"
+                android:src="@drawable/receivejob"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:paddingTop="10dp"
@@ -59,12 +61,14 @@
         />
     </LinearLayout>
     <LinearLayout
-            android:layout_width="330dp"
-            android:layout_height="96dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
             android:background="#A9B7C8"
             android:layout_gravity="center"
             android:orientation="horizontal"
-            android:layout_marginTop="15dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
     >
         <ImageView
                 android:layout_width="115dp"
@@ -85,25 +89,25 @@
         />
     </LinearLayout>
     <LinearLayout
+
             android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:background="#5EDCA6"
-            android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:layout_marginTop="70dp">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_gravity="bottom"
+                android:background="#5EDCA6">
         <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="Selamat Datang di C-Service"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textAlignment="center"
-                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:gravity="center"
                 android:textColor="#ffff"
         />
     </LinearLayout>
-    <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-    </FrameLayout>
+    </LinearLayout>
 </LinearLayout>

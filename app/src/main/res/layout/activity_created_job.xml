@@ -1,39 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:background="#96F2AE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
+    </android.support.v7.widget.Toolbar>
+<ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Created Job"
-            android:textSize="30sp"
-            android:textAlignment="center"
-            android:layout_marginTop="70dp"
-    />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
     <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="112dp"
+            android:id="@+id/img_upload"
+            android:layout_width="180dp"
+            android:layout_margin="10dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
             android:src="@drawable/ic_add_a_photo_black_24dp"
     />
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Judul"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:id="@+id/et_judul"
     />
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nama"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:layout_marginTop="10dp"
             android:id="@+id/et_nama"
     />
@@ -41,28 +51,90 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Departement"
-            android:textSize="13sp"
+            android:textSize="16sp"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="53sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
     />
     <Spinner
+            android:entries="@array/list_Department"
+            android:id="@+id/to_department"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:layout_width="match_parent"
-            android:layout_height="37dp"
-            android:id="@+id/spinner"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
+            android:layout_height="wrap_content"
+    >
+    </Spinner>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descripsi"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+    />
+    <EditText
+            android:id="@+id/et_deskripsi"
+            android:inputType="textMultiLine"
+            android:lines="4"
+            android:minLines="4"
+            android:background="#EFF2F7"
+            android:gravity="top|left"
+            android:maxLines="10"
+            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:scrollbars="vertical"
+            android:hint=" Note..."
+            android:textColor="@android:color/black"
+            android:textSize="16dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
     />
 
-    //sampai tanggal nya belum
-    //character count live text view belum
-
-    <Button
-            android:layout_width="330dp"
+    <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:text="Sampai Tanggal"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+    />
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:id="@+id/et_dodate"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+    />
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+    <Button
+            android:id="@+id/btn_buat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"
             android:text="Buat"
             android:textColor="#ffff"
             android:background="#47525E"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
     />
-</LinearLayout>
+
+    </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
+    <include
+            android:id="@+id/ll_loading"
+            android:visibility="gone"
+            layout="@layout/activity_loading"/>
+</RelativeLayout>
