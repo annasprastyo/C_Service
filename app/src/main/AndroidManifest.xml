@@ -12,7 +12,7 @@
             android:roundIcon="@mipmap/ic_logos"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".activity.Coba">
+        <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -50,6 +50,11 @@
         <activity android:name=".activity.LoginActivity"/>
         <activity android:name=".activity.SettingActivity"/>
         <activity android:name=".createjob.CreateJobActivity"/>
+        <activity android:name=".receivejob.HistoryReceiveJobActivity"/>
+        <activity android:name=".receivejob.ProsesReceiveJobActivity"/>
+        <activity android:name=".receivejob.ReceiveJobActivity"/>
+        <activity android:name=".createjob.HistoryCreateJobActivity"/>
+        <activity android:name=".createjob.ProsesCreateJobActivity"/>
     </application>
 
 </manifest>

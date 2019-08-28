@@ -26,6 +26,7 @@ import android.widget.DatePicker
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.c_service.activity.PrefsHelper
+import com.example.c_service.data.SettingApi
 import com.example.c_service.utilities.Const
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -33,6 +34,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.activity_created_job.img_upload
 import kotlinx.android.synthetic.main.activity_created_job.*
+import kotlinx.android.synthetic.main.ubah_activity.*
 import java.io.IOException
 
 class CreateJobActivity : AppCompatActivity() {
@@ -41,7 +43,8 @@ class CreateJobActivity : AppCompatActivity() {
     var textview_date: TextView? = null
     var cal = Calendar.getInstance()
 
-
+    var i: Long? = null
+    internal lateinit var set: SettingApi
     lateinit var fAuth: FirebaseAuth
     lateinit var helperPrefs: PrefsHelper
     lateinit var dbRef: DatabaseReference
@@ -64,8 +67,10 @@ class CreateJobActivity : AppCompatActivity() {
 
         // create an OnDateSetListener
         val dateSetListener = object : DatePickerDialog.OnDateSetListener {
-            override fun onDateSet(view: DatePicker, year: Int, monthOfYear: Int,
-                                   dayOfMonth: Int) {
+            override fun onDateSet(
+                view: DatePicker, year: Int, monthOfYear: Int,
+                dayOfMonth: Int
+            ) {
                 cal.set(Calendar.YEAR, year)
                 cal.set(Calendar.MONTH, monthOfYear)
                 cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -76,22 +81,26 @@ class CreateJobActivity : AppCompatActivity() {
         // when you click on the button, show DatePickerDialog that is set with OnDateSetListener
         et_dodate!!.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
-                DatePickerDialog(this@CreateJobActivity,
+                DatePickerDialog(
+                    this@CreateJobActivity,
                     dateSetListener,
                     // set DatePickerDialog to point to today's date when it loads up
                     cal.get(Calendar.YEAR),
                     cal.get(Calendar.MONTH),
-                    cal.get(Calendar.DAY_OF_MONTH)).show()
+                    cal.get(Calendar.DAY_OF_MONTH)
+                ).show()
             }
 
         })
 
+
+        set = SettingApi(this)
         fAuth = FirebaseAuth.getInstance()
         helperPrefs = PrefsHelper(this)
         fstorage = FirebaseStorage.getInstance()
         stoRef = fstorage.reference
 
-
+        et_nama.setText(set.readSetting(Const.PREF_MY_NAME))
 
         img_upload.setOnClickListener {
             when {
@@ -120,13 +129,18 @@ class CreateJobActivity : AppCompatActivity() {
         }
 
         btn_buat.setOnClickListener {
-            createjob()
+            if (et_judul.text.toString().isNotEmpty() && et_deskripsi.text.toString().isNotEmpty()) {
+                uploadFile()
+            }else{
+                Toast.makeText(this@CreateJobActivity, "Data Profil Harus Di Isi Semua!!", Toast.LENGTH_SHORT).show()
+            }
         }
 
 
     }
 
-    fun createjob(){
+    fun createjob(image : String) {
+
         val uidUser = fAuth.currentUser?.uid
 
         val judul = et_judul.text.toString()
@@ -134,39 +148,38 @@ class CreateJobActivity : AppCompatActivity() {
         val deskripsi = et_deskripsi.text.toString()
         val dodate = et_dodate.text.toString()
 
-
-//                Log.e("muncul", "${uidUser}")
-        if (judul.isNotEmpty() && department.isNotEmpty() && deskripsi.isNotEmpty()
-            && dodate.isNotEmpty()
-        ) {
-
-            dbRef = FirebaseDatabase.getInstance().reference
-            dbRef.addListenerForSingleValueEvent(object : ValueEventListener{
+            dbRef = FirebaseDatabase.getInstance().getReference("DataJob/")
+            dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    Toast.makeText(this@CreateJobActivity, "Gk iso", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onDataChange(p0: DataSnapshot) {
-                    var i = 1
-                    if (p0.exists()){
+                    i = 1
+                    if (p0.exists()) {
                         p0.children.indexOfLast {
-                            i = it.key!!.toInt() + 1
+                            i = it.key!!.toLong() + 1
                             true
                         }
-                        dbRef.child("DataJob/$i/Judul").setValue(judul)
-                        dbRef.child("DataJob/$i/Nama").setValue(Const.PREF_MY_NAME)
-                        dbRef.child("DataJob/$i/Department").setValue(department)
-                        dbRef.child("DataJob/$i/Deskripsi").setValue(deskripsi)
-                        dbRef.child("DataJob/$i/Dodate").setValue(dodate)
-                        Toast.makeText(this@CreateJobActivity, "Sukses!!", Toast.LENGTH_SHORT).show()
-                        finish()
                     }
+                    dbRef.child("/$i/Id_job").setValue(i)
+                    dbRef.child("/$i/Id_user").setValue(uidUser)
+                    dbRef.child("/$i/Judul").setValue(judul)
+                    dbRef.child("/$i/Nama").setValue(set.readSetting(Const.PREF_MY_NAME))
+                    dbRef.child("/$i/Department").setValue(department)
+                    dbRef.child("/$i/Deskripsi").setValue(deskripsi)
+                    dbRef.child("/$i/Dodate").setValue(dodate)
+                    dbRef.child("/$i/Image").setValue(image)
+                    dbRef.child("/$i/Id_receive").setValue("null")
+                    Toast.makeText(this@CreateJobActivity, "Sukses!!", Toast.LENGTH_SHORT).show()
+
+                    var intent = Intent(this@CreateJobActivity, ProsesCreateJobActivity::class.java)
+                    intent.putExtra("Id_job", i!!.toLong())
+                    startActivity(intent)
+
                 }
 
             })
-        } else {
-            Toast.makeText(this@CreateJobActivity, "Data Profil Harus Di Isi Semua!!", Toast.LENGTH_SHORT).show()
-        }
     }
 
     private fun imageChooser() {
@@ -176,6 +189,7 @@ class CreateJobActivity : AppCompatActivity() {
         }
         startActivityForResult(Intent.createChooser(intent, "select image"), REQUEST_IMAGE)
     }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
@@ -200,7 +214,7 @@ class CreateJobActivity : AppCompatActivity() {
         when (requestCode) {
             REQUEST_IMAGE -> {
                 filePath = data!!.data
-                uploadFile()
+//                uploadFile()
                 try {
                     val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(
                         this.contentResolver, filePath
@@ -224,7 +238,7 @@ class CreateJobActivity : AppCompatActivity() {
     }
 
     private fun uploadFile() {
-        ll_loading.visibility = View.VISIBLE
+//        ll_loading.visibility = View.VISIBLE
         val data = FirebaseStorage.getInstance()
 
         val uid = helperPrefs.getUID()
@@ -232,18 +246,18 @@ class CreateJobActivity : AppCompatActivity() {
         val ref: StorageReference = stoRef
             .child("createjob/${nameX}.${GetFileExtension(filePath)}")
 //        var storage = data.reference.child("Image_Profile/$nameX").putFile(filePath)
+        ll_loading.visibility = View.VISIBLE
         ref.putFile(filePath)
             .addOnProgressListener { taskSnapshot ->
                 value = (100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount)
             }
             .addOnSuccessListener {
                 ref.downloadUrl.addOnSuccessListener {
-//                    dbRef = FirebaseDatabase.getInstance().getReference("createjob/$uid")
-//                    dbRef.child("image").setValue(it.toString())
-                }
-                Toast.makeText(this@CreateJobActivity, "berhasil upload", Toast.LENGTH_SHORT).show()
-                ll_loading.visibility = View.GONE
+                    ll_loading.visibility = View.GONE
+                    createjob(it.toString())
 
+                }
+////                Toast.makeText(this@CreateJobActivity, "berhasil upload", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { exception ->
                 exception.printStackTrace()
@@ -267,8 +281,8 @@ class CreateJobActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item!!.itemId){
-            android.R.id.home ->{
+        when (item!!.itemId) {
+            android.R.id.home -> {
                 finish()
             }
         }
