@@ -7,14 +7,16 @@ class JobModel {
     private var id_receive: String? = null
     private var deskripsi: String? = null
     private var department: String? = null
+    private var dodate: String? = null
     private var image: String? = null
+    private var isdone: Long? = null
     private var key: String? = null
 
 
     constructor()
     constructor(
         id_job: Long, judul: String, id_user: String, id_receive: String, deskripsi: String,
-        department: String, image: String
+        department: String, dodate: String, image: String, isdone: Long
     ) {
         this.id_job = id_job
         this.judul = judul
@@ -22,7 +24,9 @@ class JobModel {
         this.id_receive = id_receive
         this.deskripsi = deskripsi
         this.department = department
+        this.dodate = dodate
         this.image = image
+        this.isdone = isdone
     }
 
     fun getId_job(): Long? {
@@ -87,6 +91,22 @@ class JobModel {
 
     fun setImage(image: String) {
         this.image = image
+    }
+
+    fun getIsdone(): Long {
+        return isdone!!
+    }
+
+    fun setIsdone(isdone: Long) {
+        this.isdone = isdone
+    }
+
+    fun getDodate(): String {
+        return dodate!!
+    }
+
+    fun setDodate(dodate: String) {
+        this.dodate = dodate
     }
 
 }

@@ -7,14 +7,16 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import com.example.c_service.R
 import com.example.c_service.model.DetailJobModel
+import com.example.c_service.utilities.Const
+import com.google.firebase.database.*
 
 class ProsesCreateJobAdapter: RecyclerView.Adapter<ProsesCreateJobAdapter.ProresCreateJobViewHolder> {
+
+    lateinit var dbref: DatabaseReference
+    lateinit var delete: DatabaseReference
     lateinit var mContext: Context
     lateinit var itemMyorder: List<DetailJobModel>
 //    lateinit var listener : FirebaseDataListener
@@ -43,22 +45,36 @@ class ProsesCreateJobAdapter: RecyclerView.Adapter<ProsesCreateJobAdapter.Prores
         val id_job = jobModel.getId_job()!!.toLong()
         p0.id_deskripsi.text = jobModel.getDeskripsi()
 
-        if (jobModel.getIsdone()!!.toLong().equals(1)){
+        if (jobModel.getIsdone().toString().equals("1")){
             p0.id_isdone.isChecked = true
         }else{
             p0.id_isdone.isChecked = false
         }
-
         p0.id_delete.setOnClickListener {
-            //            Toast.makeText(mContext, "${p0.idtransaksi.text}/${p0.idlaundri.text}",
-//                Toast.LENGTH_SHORT).show()
-//            var idtransaksi = idtrans.toLong()
-////            val b = Bundle()
-////            b.putSerializable("kode", datax)
-//            var intent = Intent(mContext, TrDetailActivity::class.java)
-//            intent.putExtra("idtransaksi", idtransaksi)
-//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-//            mContext.applicationContext.startActivity(intent)
+            delete = FirebaseDatabase.getInstance().getReference("DataDetailJob/")
+            delete.child("/${jobModel.getId_detail_job()!!.toLong()}").removeValue()
+            Toast.makeText(mContext, "Data Detail Berhasil di Delete!!", Toast.LENGTH_SHORT).show()
+        }
+        p0.id_isdone.setOnClickListener {
+
+            if (jobModel.getIsdone().toString().equals("1")){
+                p0.id_isdone.isChecked = true
+                Toast.makeText(mContext, "Pengerjaan Telah Selesai", Toast.LENGTH_SHORT).show()
+            }else{
+                dbref = FirebaseDatabase.getInstance().getReference("DataDetailJob/")
+                dbref.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+                        Toast.makeText(mContext, "Gk iso", Toast.LENGTH_SHORT).show()
+                    }
+
+                    override fun onDataChange(p0: DataSnapshot) {
+                        dbref.child("/${jobModel.getId_detail_job()!!.toLong()}/isdone").setValue(1)
+                        Toast.makeText(mContext, "Pengerjaan Selesai!!", Toast.LENGTH_SHORT).show()
+
+                    }
+
+                })
+            }
         }
 
 

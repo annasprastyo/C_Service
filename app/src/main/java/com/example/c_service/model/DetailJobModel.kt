@@ -15,6 +15,7 @@ class DetailJobModel {
         this.id_user = id_user
         this.deskripsi = deskripsi
         this.isdone = isdone
+        this.key = key
     }
 
     fun getId_job(): Long? {

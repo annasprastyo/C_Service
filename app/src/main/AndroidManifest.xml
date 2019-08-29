@@ -55,6 +55,8 @@
         <activity android:name=".receivejob.ReceiveJobActivity"/>
         <activity android:name=".createjob.HistoryCreateJobActivity"/>
         <activity android:name=".createjob.ProsesCreateJobActivity"/>
+        <activity android:name=".createjob.AddDetailJobActivity"/>
+        <activity android:name=".createjob.DataCreateJobActivity"/>
     </application>
 
 </manifest>

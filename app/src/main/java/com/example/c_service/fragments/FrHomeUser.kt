@@ -34,7 +34,7 @@ class FrHomeUser: Fragment() {
         }))
 
         ll_ReceiveJob.setOnClickListener(({
-            val frreceivejob = FrCreateJob()
+            val frreceivejob = FrReceiveJob()
             val fragmentManager = fragmentManager
             fragmentManager!!.beginTransaction().setCustomAnimations(
                 R.anim.design_bottom_sheet_slide_in,

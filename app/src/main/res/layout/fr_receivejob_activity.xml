@@ -51,6 +51,7 @@
             android:orientation="horizontal"
             android:layout_gravity="center">
         <ImageView
+                android:id="@+id/ll_ReceiveJob"
                 android:layout_width="81dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/receivejob"

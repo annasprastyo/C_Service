@@ -162,21 +162,22 @@ class CreateJobActivity : AppCompatActivity() {
                             true
                         }
                     }
-                    dbRef.child("/$i/Id_job").setValue(i)
-                    dbRef.child("/$i/Id_user").setValue(uidUser)
-                    dbRef.child("/$i/Judul").setValue(judul)
-                    dbRef.child("/$i/Nama").setValue(set.readSetting(Const.PREF_MY_NAME))
-                    dbRef.child("/$i/Department").setValue(department)
-                    dbRef.child("/$i/Deskripsi").setValue(deskripsi)
-                    dbRef.child("/$i/Dodate").setValue(dodate)
-                    dbRef.child("/$i/Image").setValue(image)
-                    dbRef.child("/$i/Id_receive").setValue("null")
+                    dbRef.child("/$i/id_job").setValue(i)
+                    dbRef.child("/$i/id_user").setValue(uidUser)
+                    dbRef.child("/$i/judul").setValue(judul)
+                    dbRef.child("/$i/nama").setValue(set.readSetting(Const.PREF_MY_NAME))
+                    dbRef.child("/$i/department").setValue(department)
+                    dbRef.child("/$i/deskripsi").setValue(deskripsi)
+                    dbRef.child("/$i/dodate").setValue(dodate)
+                    dbRef.child("/$i/image").setValue(image)
+                    dbRef.child("/$i/id_receive").setValue("null")
+                    dbRef.child("/$i/isdone").setValue(0)
                     Toast.makeText(this@CreateJobActivity, "Sukses!!", Toast.LENGTH_SHORT).show()
 
                     var intent = Intent(this@CreateJobActivity, ProsesCreateJobActivity::class.java)
                     intent.putExtra("Id_job", i!!.toLong())
                     startActivity(intent)
-
+                    finish()
                 }
 
             })

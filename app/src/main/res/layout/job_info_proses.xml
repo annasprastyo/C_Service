@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
     <RelativeLayout
+            android:id="@+id/id_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
     <android.support.v7.widget.Toolbar
@@ -23,6 +24,8 @@
                 android:text="Selesai"/>
     </RelativeLayout>
     <LinearLayout
+            android:id="@+id/content"
+            android:layout_below="@+id/id_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -38,6 +41,8 @@
         />
     </LinearLayout>
     <LinearLayout
+            android:id="@+id/content2"
+            android:layout_below="@id/content"
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -139,6 +144,8 @@
     </LinearLayout>
 
     <LinearLayout
+            android:id="@+id/content3"
+            android:layout_below="@+id/content2"
             android:background="#D8D8D8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -149,16 +156,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:text="Deskripsi"/>
         <TextView
                 android:id="@+id/id_deskripsi"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
                 android:text="Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusant doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis."
         />
     </LinearLayout>
     <LinearLayout
+            android:id="@+id/content4"
+            android:layout_below="@+id/content3"
             android:background="#D8D8D8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -188,22 +202,25 @@
         </LinearLayout>
 
         <LinearLayout
+                android:layout_gravity="center"
                 android:layout_weight="1.1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
             <TextView
+                    android:id="@+id/nama_receive"
+                    android:layout_marginTop="7dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nama Receive "/>
             <TextView
-                    android:layout_marginTop="5dp"
+                    android:id="@+id/receive_department"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Deparment "/>
             <TextView
-                    android:layout_marginTop="5dp"
+                    android:id="@+id/receive_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Email "/>
@@ -226,6 +243,8 @@
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
+            android:id="@+id/content5"
+            android:layout_below="@+id/content4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -258,9 +277,73 @@
 
     <android.support.v7.widget.RecyclerView
             android:id="@+id/rvDetailJob"
+            android:layout_below="@+id/content5"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
-</LinearLayout>
+    <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/content_add"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#CCFFFFFF">
+
+        <LinearLayout
+                android:id="@+id/grub_add"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:background="#DDDDDD">
+
+            <TextView
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:textSize="25dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add Detail Job"/>
+            <TextView
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Note Description"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"/>
+            <EditText
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/et_deskripsi"
+                    android:inputType="textMultiLine"
+                    android:lines="4"
+                    android:minLines="4"
+                    android:background="#EFF2F7"
+                    android:gravity="top|left"
+                    android:maxLines="10"
+                    android:padding="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:scrollbars="vertical"
+                    android:hint=" Note..."
+                    android:textColor="@android:color/black"
+                    android:textSize="16dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+            />
+            <Button
+                    android:id="@+id/btn_simpan_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:background="@color/biruDesain"
+                    android:text="Simpan"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
