@@ -45,7 +45,8 @@ class DataCreateJobActivity: AppCompatActivity() {
                 list = ArrayList<JobModel>()
                 for (dataSnapshot in p0.children) {
                     val addDataAll = dataSnapshot.getValue(JobModel::class.java)
-                    if (addDataAll!!.getId_user() == set.readSetting(Const.PREF_MY_ID)!!.toString()) {
+                    if (addDataAll!!.getId_user() == set.readSetting(Const.PREF_MY_ID)!!.toString() &&
+                        addDataAll!!.getIsdone().toString().equals("0")) {
                         addDataAll!!.setKey(dataSnapshot.key!!)
                         list.add(addDataAll)
                         DataJobAdapter = DataJobAdapter(this@DataCreateJobActivity, list)

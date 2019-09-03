@@ -30,6 +30,7 @@ class FrCreateJob: Fragment() {
         helperPrefs = PrefsHelper(activity!!)
         id_createdjob.setOnClickListener {
             startActivity(Intent(activity!!, CreateJobActivity::class.java))
+            helperPrefs.savePilih("create")
         }
         ll_proses.setOnClickListener {
             startActivity(Intent(activity!!, DataCreateJobActivity::class.java))

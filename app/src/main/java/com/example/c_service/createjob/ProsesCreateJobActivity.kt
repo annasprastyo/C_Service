@@ -14,10 +14,12 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.c_service.R
 import com.example.c_service.activity.ChatDetailsActivity
+import com.example.c_service.activity.PrefsHelper
 import com.example.c_service.adapter.ProsesCreateJobAdapter
 import com.example.c_service.data.SettingApi
 import com.example.c_service.model.DetailJobModel
 import com.example.c_service.model.Friend
+import com.example.c_service.receivejob.ProsesReceiveJobActivity
 import com.example.c_service.utilities.Const
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.job_info_proses.*
@@ -28,6 +30,7 @@ class ProsesCreateJobActivity : AppCompatActivity(){
     var Id_job : Long? = null
     internal lateinit var set: SettingApi
     private var rvDetailJob: RecyclerView? = null
+    lateinit var helperPrefs: PrefsHelper
     private var ProsesCreateJobAdapter: ProsesCreateJobAdapter? = null
     private var actionBar: ActionBar? = null
     private var list: MutableList<DetailJobModel> = ArrayList<DetailJobModel>()
@@ -39,13 +42,19 @@ class ProsesCreateJobActivity : AppCompatActivity(){
 
         initToolbar()
         set = SettingApi(this)
+        helperPrefs = PrefsHelper(this)
         Id_job = intent.getLongExtra("Id_job",0)
         rvDetailJob = findViewById(R.id.rvDetailJob)
         rvDetailJob!!.layoutManager = LinearLayoutManager(this)
         rvDetailJob!!.setHasFixedSize(true)
         getDataJob(Id_job!!.toLong())
         getDataDetailJob(Id_job!!.toLong())
-        getDataReceive()
+
+//        Toast.makeText(this, "${helperPrefs.getPilih()!!.toString()}", Toast.LENGTH_SHORT).show()
+
+        btn_selesai.setOnClickListener {
+           transactionDone(Id_job!!.toLong())
+        }
 
         add.setOnClickListener {
             content_add.visibility = View.VISIBLE
@@ -65,19 +74,33 @@ class ProsesCreateJobActivity : AppCompatActivity(){
 
     }
 
-    private fun getDataReceive() {
-        val dbRefUser = FirebaseDatabase.getInstance().getReference("User/ACUbmfcG88TMl0pnsSmMjqp9PMg1")
+    fun transactionDone(id_job : Long){
+        dbref = FirebaseDatabase.getInstance().getReference("DataJob/${id_job}")
+        dbref.child("/isdone").setValue(1)
+        Toast.makeText(this, "Pekerjaan Telah di Selesaikan", Toast.LENGTH_SHORT).show()
+        onBackPressed()
+//        startActivity(Intent(this@ProsesCreateJobActivity, ))
+    }
+
+    private fun getDataReceive(id: String) {
+        val dbRefUser = FirebaseDatabase.getInstance().getReference("User/${id}")
         dbRefUser.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
 
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-
+                if (p0.child("/Foto").value.toString() != "null") {
+                    Glide.with(this@ProsesCreateJobActivity)
+                        .load(p0.child("/Foto").value.toString())
+                        .into(avatar)
+                }
                 nama_receive.text = p0.child("/Nama").value.toString()
                 receive_department.text = p0.child("/Department").value.toString()
                 receive_email.text = p0.child("/Email").value.toString()
                 id_chat.setOnClickListener {
+                    val friend = Friend("${p0.child("/ID").value.toString()}" , "${p0.child("Nama").value.toString()}", "${p0.child("/Foto").value.toString()}")
+                    ChatDetailsActivity.navigate(this@ProsesCreateJobActivity ,it, friend)
                 }
             }
 
@@ -102,6 +125,18 @@ class ProsesCreateJobActivity : AppCompatActivity(){
                 id_department.text = p0.child("/department").value.toString()
                 id_tanggal.text = p0.child("/dodate").value.toString()
                 id_deskripsi.text = p0.child("/deskripsi").value.toString()
+                if (p0.child("/id_receive").value.toString() == "null"){
+                    id_wait.visibility = View.VISIBLE
+                }else{
+                    id_wait.visibility = View.GONE
+                    if (helperPrefs.getPilih()!!.toString() == "create"){
+                        btn_selesai.visibility = View.VISIBLE
+                        getDataReceive(p0.child("/id_receive").value.toString())
+                    }else if(helperPrefs.getPilih()!!.toString() == "receive"){
+                        btn_selesai.visibility = View.GONE
+                        getDataReceive(p0.child("/id_user").value.toString())
+                    }
+                }
             }
 
         })
@@ -181,7 +216,12 @@ class ProsesCreateJobActivity : AppCompatActivity(){
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             android.R.id.home -> {
+                if (helperPrefs.getPilih()!!.toString() == "create"){
                 startActivity(Intent(this, DataCreateJobActivity::class.java))
+                }else if (helperPrefs.getPilih()!!.toString() == "receive"){
+                    startActivity(Intent(this, ProsesReceiveJobActivity::class.java))
+                }
+                finish()
             }
         }
         return super.onOptionsItemSelected(item)

@@ -81,7 +81,9 @@ class LoginActivity: AppCompatActivity() {
                     var userid = p0.child("/ID").value.toString()
                     var nama = p0.child("/Nama").value.toString()
                     var photo = p0.child("/Foto").value.toString()
+                    var department = p0.child("/Department").value.toString()
 
+                    helperPrefs.saveDepartment(department)
                     set.addUpdateSettings(Const.PREF_MY_ID, userid)
                     set.addUpdateSettings(Const.PREF_MY_NAME, nama)
                     set.addUpdateSettings(Const.PREF_MY_DP, photo)
