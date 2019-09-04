@@ -21,7 +21,7 @@
             android:background="@drawable/border_input_login"
             android:layout_marginStart="50dp"
             android:layout_marginEnd="50dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="50dp"
             android:id="@+id/et_email"
     />
     <EditText
@@ -37,13 +37,15 @@
             android:id="@+id/et_pass"
     />
     <Button
-            android:layout_width="320dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="login"
             android:layout_gravity="center"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
             android:textColor="#ffff"
-            android:background="#64AAF5"
+            android:background="@drawable/lengkung"
             android:id="@+id/btn_login"
     />
     <TextView
@@ -55,13 +57,15 @@
             android:textAlignment="center"
     />
     <Button
-            android:layout_width="320dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Register"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
             android:textColor="#ffff"
-            android:background="#B7C5D4"
+            android:background="@drawable/lengkung2"
             android:id="@+id/btn_register"
     />
 

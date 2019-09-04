@@ -60,6 +60,15 @@ class DataJobAdapter: RecyclerView.Adapter<DataJobAdapter.DataJobViewHolder> {
         p0.id_department.text = jobModel.getDepartment()
         p0.dodate.text = jobModel.getDodate()
 
+
+        if (jobModel.getIsdone().toString().equals("0")){
+            p0.ll_status.setBackgroundColor(ContextCompat.getColor(mContext, R.color.biruDesain))
+            p0.status.text = "Proses"
+        }else {
+            p0.ll_status.setBackgroundColor(ContextCompat.getColor(mContext, R.color.success))
+            p0.status.text = "Selesai"
+        }
+
         if (helperPrefs.getPilih().toString().equals("create")){
             p0.ll_status.visibility = View.VISIBLE
 
@@ -89,13 +98,19 @@ class DataJobAdapter: RecyclerView.Adapter<DataJobAdapter.DataJobViewHolder> {
             p0.ll_status2.visibility = View.GONE
         }
 
-        if (jobModel.getIsdone().toString().equals("0")){
-            p0.ll_status.setBackgroundColor(ContextCompat.getColor(mContext, R.color.biruDesain))
-            p0.status.text = "Proses"
-        }else {
-            p0.ll_status.setBackgroundColor(ContextCompat.getColor(mContext, R.color.success))
-            p0.dodate.text = "Selesai"
+        if (helperPrefs.getPilih().toString().equals("historyc") ||
+            helperPrefs.getPilih().toString().equals("historyr")){
+            p0.ll_status.visibility = View.VISIBLE
+            p0.ll_status2.visibility = View.GONE
+            p0.ll_datajob.setOnClickListener {
+                var intent = Intent(mContext, ProsesCreateJobActivity::class.java)
+                intent.putExtra("Id_job", jobModel.getId_job()!!.toLong())
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                mContext.applicationContext.startActivity(intent)
+            }
         }
+
+
 
 
 

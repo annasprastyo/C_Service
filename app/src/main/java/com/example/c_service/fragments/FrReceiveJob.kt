@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.example.c_service.R
 import com.example.c_service.activity.PrefsHelper
 import com.example.c_service.createjob.DataCreateJobActivity
+import com.example.c_service.receivejob.HistoryReceiveJobActivity
 import com.example.c_service.receivejob.ProsesReceiveJobActivity
 import com.example.c_service.receivejob.ReceiveJobActivity
 import kotlinx.android.synthetic.main.fr_receivejob_activity.*
@@ -37,6 +38,10 @@ class FrReceiveJob: Fragment() {
         ll_Proses_Receive.setOnClickListener {
             startActivity(Intent(activity!!, ProsesReceiveJobActivity::class.java))
             helperPrefs.savePilih("receive")
+        }
+        ll_History_Receive.setOnClickListener {
+            startActivity(Intent(activity!!, HistoryReceiveJobActivity::class.java))
+            helperPrefs.savePilih("historyr")
         }
     }
 }

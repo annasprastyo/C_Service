@@ -1,8 +1,10 @@
 package com.example.c_service.createjob
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.ActionBar
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -36,6 +38,7 @@ class ProsesCreateJobActivity : AppCompatActivity(){
     private var list: MutableList<DetailJobModel> = ArrayList<DetailJobModel>()
     lateinit var dbref: DatabaseReference
 
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.job_info_proses)
@@ -47,10 +50,18 @@ class ProsesCreateJobActivity : AppCompatActivity(){
         rvDetailJob = findViewById(R.id.rvDetailJob)
         rvDetailJob!!.layoutManager = LinearLayoutManager(this)
         rvDetailJob!!.setHasFixedSize(true)
+
+        if (helperPrefs.getPilih()!!.toString().equals("historyc") ||
+            helperPrefs.getPilih()!!.toString().equals("historyr")){
+            add.visibility = View.INVISIBLE
+            id_chat.visibility = View.GONE
+        }
+
         getDataJob(Id_job!!.toLong())
         getDataDetailJob(Id_job!!.toLong())
 
-//        Toast.makeText(this, "${helperPrefs.getPilih()!!.toString()}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "${helperPrefs.getPilih()!!.toString()}", Toast.LENGTH_SHORT).show()
+
 
         btn_selesai.setOnClickListener {
            transactionDone(Id_job!!.toLong())
@@ -75,11 +86,27 @@ class ProsesCreateJobActivity : AppCompatActivity(){
     }
 
     fun transactionDone(id_job : Long){
-        dbref = FirebaseDatabase.getInstance().getReference("DataJob/${id_job}")
-        dbref.child("/isdone").setValue(1)
-        Toast.makeText(this, "Pekerjaan Telah di Selesaikan", Toast.LENGTH_SHORT).show()
-        onBackPressed()
-//        startActivity(Intent(this@ProsesCreateJobActivity, ))
+        val builder = AlertDialog.Builder(this@ProsesCreateJobActivity)
+        builder.setTitle("Pekerjaan Selesai?")
+        builder.setMessage("Apakah pekerjaan sudah di selesaikan?")
+        builder.setPositiveButton("YES"){dialog, which ->
+//            Toast.makeText(applicationContext,"Ok, we change the app background.",Toast.LENGTH_SHORT).show()
+            dbref = FirebaseDatabase.getInstance().getReference("DataJob/${id_job}")
+            dbref.child("/isdone").setValue(1)
+            Toast.makeText(this, "Pekerjaan Telah di Selesaikan", Toast.LENGTH_SHORT).show()
+            onBackPressed()
+        }
+
+//        builder.setNegativeButton("No"){dialog,which ->
+//            Toast.makeText(applicationContext,"You are not agree.",Toast.LENGTH_SHORT).show()
+//        }
+
+        builder.setNeutralButton("Cancel"){_,_ ->
+            Toast.makeText(applicationContext,"Kamu membatalkan penyelesaian.",Toast.LENGTH_SHORT).show()
+        }
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 
     private fun getDataReceive(id: String) {
@@ -129,10 +156,14 @@ class ProsesCreateJobActivity : AppCompatActivity(){
                     id_wait.visibility = View.VISIBLE
                 }else{
                     id_wait.visibility = View.GONE
-                    if (helperPrefs.getPilih()!!.toString() == "create"){
+                    if (helperPrefs.getPilih()!!.toString() == "create") {
                         btn_selesai.visibility = View.VISIBLE
                         getDataReceive(p0.child("/id_receive").value.toString())
-                    }else if(helperPrefs.getPilih()!!.toString() == "receive"){
+                    }else if(helperPrefs.getPilih()!!.toString() == "historyc"){
+                        btn_selesai.visibility = View.GONE
+                        getDataReceive(p0.child("/id_receive").value.toString())
+                    }else if(helperPrefs.getPilih()!!.toString() == "receive" ||
+                        helperPrefs.getPilih()!!.toString() == "historyr"){
                         btn_selesai.visibility = View.GONE
                         getDataReceive(p0.child("/id_user").value.toString())
                     }

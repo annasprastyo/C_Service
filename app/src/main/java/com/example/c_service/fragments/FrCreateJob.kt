@@ -10,6 +10,7 @@ import com.example.c_service.R
 import com.example.c_service.activity.PrefsHelper
 import com.example.c_service.createjob.CreateJobActivity
 import com.example.c_service.createjob.DataCreateJobActivity
+import com.example.c_service.createjob.HistoryCreateJobActivity
 import kotlinx.android.synthetic.main.fr_createjob_activity.*
 
 class FrCreateJob: Fragment() {
@@ -35,6 +36,10 @@ class FrCreateJob: Fragment() {
         ll_proses.setOnClickListener {
             startActivity(Intent(activity!!, DataCreateJobActivity::class.java))
             helperPrefs.savePilih("create")
+        }
+        ll_history_create.setOnClickListener {
+            startActivity(Intent(activity!!, HistoryCreateJobActivity::class.java))
+            helperPrefs.savePilih("historyc")
         }
 
     }
