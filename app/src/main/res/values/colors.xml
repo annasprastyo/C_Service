@@ -8,6 +8,7 @@
     <!-- Warna Desain Biru -->
     <color name="biruDesain">#A3D4F7</color>
     <color name="hijauDesain">#B1FDD3</color>
+    <color name="hijaumudahDesain">#C2FDA8</color>
 
     <color name="grey_bg">#EBEFF0</color>
     <color name="grey_medium">#BDBFC1</color>
@@ -21,6 +22,7 @@
     <color name="error">#8b0000</color>
     <color name="info">#000080</color>
     <color name="success">#008000</color>
+
 
 
 </resources>
