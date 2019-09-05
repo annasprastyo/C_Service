@@ -81,7 +81,8 @@ class ReceiveJobActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             android.R.id.home -> {
-                startActivity(Intent(this, MainActivity::class.java))
+//                startActivity(Intent(this, MainActivity::class.java))
+                onBackPressed()
                 finish()
             }
         }

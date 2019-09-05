@@ -93,7 +93,7 @@ class JobModel {
         this.image = image
     }
 
-    fun getIsdone(): Long {
+    fun getIsdone(): Long? {
         return isdone!!
     }
 
@@ -101,7 +101,7 @@ class JobModel {
         this.isdone = isdone
     }
 
-    fun getDodate(): String {
+    fun getDodate(): String? {
         return dodate!!
     }
 

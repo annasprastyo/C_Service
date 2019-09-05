@@ -47,16 +47,16 @@ class ProsesReceiveJobActivity : AppCompatActivity() {
                 for (dataSnapshot in p0.children) {
                     val addDataAll = dataSnapshot.getValue(JobModel::class.java)
                     if (addDataAll!!.getId_receive() == helperPrefs.getUID()!!.toString() &&
-                        addDataAll!!.getIsdone().toString().equals("0")) {
-                        addDataAll!!.setKey(dataSnapshot.key!!)
+                        addDataAll!!.getIsdone()!!.toLong().equals(0L)) {
+//                        addDataAll!!.setKey(dataSnapshot.key!!)
                         list.add(addDataAll)
                         DataJobAdapter = DataJobAdapter(this@ProsesReceiveJobActivity, list)
                         rvDataJob!!.adapter = DataJobAdapter
                     }
 //                    Log.e("TAG_ERROR", "${list}")
-
 //                    Log.e("view", "${dataSnapshot}")
                 }
+
             }
 
             override fun onCancelled(p0: DatabaseError) {

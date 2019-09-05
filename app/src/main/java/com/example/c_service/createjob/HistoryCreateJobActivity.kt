@@ -45,7 +45,7 @@ class HistoryCreateJobActivity : AppCompatActivity() {
                 for (dataSnapshot in p0.children) {
                     val addDataAll = dataSnapshot.getValue(JobModel::class.java)
                     if (addDataAll!!.getId_user() == set.readSetting(Const.PREF_MY_ID)!!.toString() &&
-                        addDataAll!!.getIsdone().toString().equals("1")) {
+                        addDataAll!!.getIsdone()!!.toLong().equals(1L)) {
                         addDataAll!!.setKey(dataSnapshot.key!!)
                         list.add(addDataAll)
                         DataJobAdapter = DataJobAdapter(this@HistoryCreateJobActivity, list)
@@ -77,7 +77,8 @@ class HistoryCreateJobActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             android.R.id.home -> {
-                startActivity(Intent(this, MainActivity::class.java))
+//                startActivity(Intent(this, MainActivity::class.java))
+                onBackPressed()
                 finish()
             }
         }

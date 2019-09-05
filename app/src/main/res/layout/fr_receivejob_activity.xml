@@ -3,12 +3,15 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-
+<LinearLayout
+        android:layout_margin="23dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#778888"
-            android:layout_margin="23dp"
             android:orientation="horizontal"
             android:layout_gravity="center"
     >
@@ -37,8 +40,6 @@
             android:layout_height="30dp"
             android:layout_marginTop="-25dp"
             android:background="#676767"
-            android:layout_marginStart="23dp"
-            android:layout_marginEnd="23dp"
             android:orientation="horizontal"
             android:layout_gravity="center">
     </LinearLayout>
@@ -46,9 +47,7 @@
             android:id="@+id/ll_ReceiveJob"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:background="#E2E0E0"
-            android:layout_marginStart="23dp"
-            android:layout_marginEnd="23dp"
+            android:background="@drawable/lengkung3"
             android:orientation="horizontal"
             android:layout_gravity="center">
         <ImageView
@@ -71,9 +70,7 @@
             android:id="@+id/ll_Proses_Receive"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:background="#E2E0E0"
-            android:layout_marginStart="23dp"
-            android:layout_marginEnd="23dp"
+            android:background="@drawable/lengkung3"
             android:orientation="horizontal"
             android:layout_gravity="center">
         <ImageView
@@ -96,10 +93,8 @@
             android:id="@+id/ll_History_Receive"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:background="#E2E0E0"
+            android:background="@drawable/lengkung3"
             android:orientation="horizontal"
-            android:layout_marginStart="23dp"
-            android:layout_marginEnd="23dp"
             android:layout_gravity="center">
         <ImageView
                 android:layout_width="81dp"
@@ -117,5 +112,5 @@
                 android:layout_gravity="center"
         />
     </LinearLayout>
-
+</LinearLayout>
 </LinearLayout>

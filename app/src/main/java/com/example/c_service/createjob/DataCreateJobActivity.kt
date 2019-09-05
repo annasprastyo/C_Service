@@ -40,22 +40,19 @@ class DataCreateJobActivity: AppCompatActivity() {
 
     fun getDataDetailJob(){
         dbref = FirebaseDatabase.getInstance().getReference("DataJob/")
-        dbref.addValueEventListener(object : ValueEventListener {
+        dbref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 list = ArrayList<JobModel>()
                 for (dataSnapshot in p0.children) {
                     val addDataAll = dataSnapshot.getValue(JobModel::class.java)
-                    if (addDataAll!!.getId_user() == set.readSetting(Const.PREF_MY_ID)!!.toString() &&
-                        addDataAll!!.getIsdone().toString().equals("0")) {
-                        addDataAll!!.setKey(dataSnapshot.key!!)
-                        list.add(addDataAll)
-                        DataJobAdapter = DataJobAdapter(this@DataCreateJobActivity, list)
-                        rvDataJob!!.adapter = DataJobAdapter
+                    if (addDataAll!!.getIsdone()!!.toLong().equals(0L) &&
+                        addDataAll!!.getId_user() == set.readSetting(Const.PREF_MY_ID)!!.toString()) {
+//                        addDataAll!!.setKey(dataSnapshot.key!!)
+                        list.add(addDataAll!!)
                     }
-//                    Log.e("TAG_ERROR", "${list}")
-
-//                    Log.e("view", "${dataSnapshot}")
                 }
+                DataJobAdapter = DataJobAdapter(this@DataCreateJobActivity, list)
+                rvDataJob!!.adapter = DataJobAdapter
             }
 
             override fun onCancelled(p0: DatabaseError) {

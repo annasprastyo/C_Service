@@ -42,6 +42,7 @@ class CreateJobActivity : AppCompatActivity() {
     private var actionBar: ActionBar? = null
     var textview_date: TextView? = null
     var cal = Calendar.getInstance()
+    var Foto : Long? = 0
 
     var i: Long? = null
     internal lateinit var set: SettingApi
@@ -100,8 +101,6 @@ class CreateJobActivity : AppCompatActivity() {
         fstorage = FirebaseStorage.getInstance()
         stoRef = fstorage.reference
 
-        et_nama.setText(set.readSetting(Const.PREF_MY_NAME))
-
         img_upload.setOnClickListener {
             when {
                 (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) -> {
@@ -127,13 +126,17 @@ class CreateJobActivity : AppCompatActivity() {
             }
 
         }
+//        btn_buat.isEnabled = false
 
         btn_buat.setOnClickListener {
-            if (et_judul.text.toString().isNotEmpty() && et_deskripsi.text.toString().isNotEmpty()) {
+            if (Foto!!.toLong() == 0L) {
+                Toast.makeText(this@CreateJobActivity, "Foto Harus Di isi", Toast.LENGTH_SHORT).show()
+            }else if (et_judul.text.toString().isNotEmpty() && et_deskripsi.text.toString().isNotEmpty()) {
                 uploadFile()
             }else{
                 Toast.makeText(this@CreateJobActivity, "Data Profil Harus Di Isi Semua!!", Toast.LENGTH_SHORT).show()
             }
+
         }
 
 
@@ -223,6 +226,9 @@ class CreateJobActivity : AppCompatActivity() {
                     Glide.with(this)
                         .load(bitmap)
                         .into(img_upload)
+//                    btn_buat.isEnabled = true
+//                    btn_buat.setBackgroundColor(ContextCompat.getColor(this, R.color.black_soft))
+                    Foto = 1
                 } catch (x: IOException) {
                     x.printStackTrace()
                 }

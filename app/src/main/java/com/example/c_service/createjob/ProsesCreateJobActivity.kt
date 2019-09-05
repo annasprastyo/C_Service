@@ -16,6 +16,7 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.c_service.R
 import com.example.c_service.activity.ChatDetailsActivity
+import com.example.c_service.activity.MainActivity
 import com.example.c_service.activity.PrefsHelper
 import com.example.c_service.adapter.ProsesCreateJobAdapter
 import com.example.c_service.data.SettingApi
@@ -60,7 +61,7 @@ class ProsesCreateJobActivity : AppCompatActivity(){
         getDataJob(Id_job!!.toLong())
         getDataDetailJob(Id_job!!.toLong())
 
-        Toast.makeText(this, "${helperPrefs.getPilih()!!.toString()}", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this, "${helperPrefs.getPilih()!!.toString()}", Toast.LENGTH_SHORT).show()
 
 
         btn_selesai.setOnClickListener {
@@ -94,7 +95,7 @@ class ProsesCreateJobActivity : AppCompatActivity(){
             dbref = FirebaseDatabase.getInstance().getReference("DataJob/${id_job}")
             dbref.child("/isdone").setValue(1)
             Toast.makeText(this, "Pekerjaan Telah di Selesaikan", Toast.LENGTH_SHORT).show()
-            onBackPressed()
+            startActivity(Intent(this@ProsesCreateJobActivity, MainActivity::class.java))
         }
 
 //        builder.setNegativeButton("No"){dialog,which ->
@@ -186,16 +187,15 @@ class ProsesCreateJobActivity : AppCompatActivity(){
 //                    }else{
 
                     if (addDataAll!!.getId_job() == Id_job!!.toLong()) {
-                        addDataAll!!.setKey(dataSnapshot.key!!)
+//                        addDataAll!!.setKey(dataSnapshot.key!!)
                         list.add(addDataAll)
-                        ProsesCreateJobAdapter = ProsesCreateJobAdapter(this@ProsesCreateJobActivity, list)
-                        rvDetailJob!!.adapter = ProsesCreateJobAdapter
                     }
 //                    Log.e("TAG_ERROR", "${list}")
-
 //                    }
 //                    Log.e("view", "${dataSnapshot}")
                 }
+                ProsesCreateJobAdapter = ProsesCreateJobAdapter(this@ProsesCreateJobActivity, list)
+                rvDetailJob!!.adapter = ProsesCreateJobAdapter
             }
 
             override fun onCancelled(p0: DatabaseError) {

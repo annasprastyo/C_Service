@@ -16,6 +16,7 @@
     <color name="me_chat_bg">#FFE0B2</color>
     <color name="grey_hard">#96989A</color>
     <color name="grey_soft">#F5F5F5</color>
+    <color name="black_soft">#47525E</color>
 
 
     <color name="warning">#ff9933</color>

@@ -65,7 +65,7 @@ class DataJobAdapter: RecyclerView.Adapter<DataJobAdapter.DataJobViewHolder> {
             p0.ll_status.setBackgroundColor(ContextCompat.getColor(mContext, R.color.biruDesain))
             p0.status.text = "Proses"
         }else {
-            p0.ll_status.setBackgroundColor(ContextCompat.getColor(mContext, R.color.success))
+            p0.ll_status.setBackgroundColor(ContextCompat.getColor(mContext, R.color.black_soft))
             p0.status.text = "Selesai"
         }
 
@@ -83,17 +83,29 @@ class DataJobAdapter: RecyclerView.Adapter<DataJobAdapter.DataJobViewHolder> {
         }
 
         if (helperPrefs.getPilih().toString().equals("receive")){
-            p0.ll_status2.visibility = View.VISIBLE
-            p0.ll_status2.setOnClickListener {
-                dbref = FirebaseDatabase.getInstance().getReference("DataJob/${jobModel.getId_job()!!.toLong()}")
-                dbref.child("id_receive").setValue(set.readSetting(Const.PREF_MY_ID))
-                Toast.makeText(mContext, "Job Di Ambil!!", Toast.LENGTH_SHORT).show()
+            if (jobModel.getId_receive().toString().equals("null")){
+                p0.ll_status2.visibility = View.VISIBLE
+                p0.ll_status2.setOnClickListener {
+                    dbref = FirebaseDatabase.getInstance().getReference("DataJob/${jobModel.getId_job()!!.toLong()}")
+                    dbref.child("id_receive").setValue(set.readSetting(Const.PREF_MY_ID))
+                    Toast.makeText(mContext, "Job Di Ambil!!", Toast.LENGTH_SHORT).show()
 
-                var intent = Intent(mContext, ProsesCreateJobActivity::class.java)
-                intent.putExtra("Id_job", jobModel.getId_job()!!.toLong())
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                mContext.applicationContext.startActivity(intent)
+                    var intent = Intent(mContext, ProsesCreateJobActivity::class.java)
+                    intent.putExtra("Id_job", jobModel.getId_job()!!.toLong())
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    mContext.applicationContext.startActivity(intent)
+                }
+            }else{
+                p0.ll_status.visibility = View.VISIBLE
+
+                p0.ll_datajob.setOnClickListener {
+                    var intent = Intent(mContext, ProsesCreateJobActivity::class.java)
+                    intent.putExtra("Id_job", jobModel.getId_job()!!.toLong())
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    mContext.applicationContext.startActivity(intent)
+                }
             }
+
         }else{
             p0.ll_status2.visibility = View.GONE
         }

@@ -47,7 +47,7 @@ class HistoryReceiveJobActivity: AppCompatActivity() {
                 for (dataSnapshot in p0.children) {
                     val addDataAll = dataSnapshot.getValue(JobModel::class.java)
                     if (addDataAll!!.getId_receive() == helperPrefs.getUID()!!.toString() &&
-                        addDataAll!!.getIsdone().toString().equals("1")) {
+                        addDataAll!!.getIsdone()!!.toLong().equals(1L)) {
                         addDataAll!!.setKey(dataSnapshot.key!!)
                         list.add(addDataAll)
                         DataJobAdapter = DataJobAdapter(this@HistoryReceiveJobActivity, list)
@@ -79,7 +79,7 @@ class HistoryReceiveJobActivity: AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             android.R.id.home -> {
-                startActivity(Intent(this, MainActivity::class.java))
+                onBackPressed()
                 finish()
             }
         }
